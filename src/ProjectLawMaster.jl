@@ -1,5 +1,5 @@
 module ProjectLawMaster
+include("dirs.jl")
 
-# Write your package code here.
 
-end
+end # module ProjectLawMaster
