@@ -9,8 +9,15 @@
 
 This is a julia package created using `okatsn`'s preference, and this package is expected to be registered to [okatsn/OkRegistry](https://github.com/okatsn/OkRegistry) for CIs to work properly.
 
+Add the OkRegistry in the pkg REPL as follows:
+
+```
+(@v1.x) pkg> registry add https://github.com/okatsn/OkRegistry.git
+```
+
 # Documentation
 
 Go to 
 https://okatsn.github.io/ProjectLawMaster.jl/
 for example scripts.
+
