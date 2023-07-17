@@ -5,12 +5,16 @@ CurrentModule = ProjectLawMaster
 # Example
 
 ```@example demo1
+pwd()
+```
+
+```@example demo1
 using JSON, CorpusCleanerForTWLaws
 using ProjectLawMaster
 using Test
 
-file0 = ProjectLawMaster.project_dir("corpus", "judicial_yuan_qa.json")
-file1 = ProjectLawMaster.project_dir("corpus", "judicial_yuan_qa_CLEANED.json")
+file0 = joinpath("..", "corpus", "judicial_yuan_qa.json")
+file1 = joinpath("..", "corpus", "judicial_yuan_qa_CLEANED.json")
 
 # # Load corpus as a CorpusType
 rawcorpus = JSON.parsefile(file0)
