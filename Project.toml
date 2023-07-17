@@ -1,7 +1,7 @@
 name = "ProjectLawMaster"
 uuid = "34127a1e-43e2-4f4e-97ac-74f3581abec9"
 authors = ["okatsn <okatsn@gmail.com> and contributors"]
-version = "0.0.1"
+version = "0.0.2"
 
 [deps]
 CorpusCleanerForTWLaws = "32148328-147a-4c3a-aded-c727b77b4e74"
