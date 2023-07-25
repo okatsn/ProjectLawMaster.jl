@@ -5,6 +5,11 @@ struct FindingMingFa <: Purpose end
 abstract type FromWhere end
 struct InKey <: FromWhere
     value
+    parent
+end
+
+function InKey(value)
+    InKey(value, 0)
 end
 
 struct AlongPath <: FromWhere
@@ -20,17 +25,27 @@ struct FileSummary
     parents
     content
     uncompresssedsize
+    readable::Bool
 end
 
 function FileSummary(rfile::ZipFile.ReadableFile)
     (fname, ext) = splitext(basename(rfile.name))
     parents = split(dirname(rfile.name), "/") |> reverse
-    content = read(rfile, String)
-    FileSummary(ext, fname, parents, content, rfile.uncompressedsize)
+    content = ""
+    readable = true
+    try
+        content = read(rfile, String)
+    catch
+        readable = false
+    end
+    FileSummary(ext, fname, parents, content, rfile.uncompressedsize, readable)
 end
 
 function DataFrames.DataFrame(::FindingMingFa, fs::FileSummary)
     df0 = DataFrame()
+    if !fs.readable
+        return df0
+    end
     if fs.ext == ".json" # find targets in keys
         d = JSON.parse(fs.content)
         for (k, str) in d
@@ -56,30 +71,47 @@ function DataFrames.DataFrame(::FindingMingFa, fs::FileSummary)
 
     insertcols!(df0, "uncompresssedsize" => fs.uncompresssedsize)
     insertcols!(df0, "filename" => fs.fname)
-
-
+    df0
 end
 
+function _append_matches!(df0, expr_target, d::Dict, found_in)
+    for (k, v) in d
+        _append_matches!(df0, expr_target, v, InKey(k, found_in))
+    end
+end
 
-function _append_matches!(df0, expr_target, str, found_in )
+function _append_matches!(df0, expr_target, v::Vector, found_in)
+    for item in v
+        _append_matches!(df0, expr_target, item, found_in)
+    end
+end
+
+# TODO: use holy trait to exclude any non-iterable things
+# Otherwise, you can do nothing.
+function _append_matches!(df0, expr_target, item, found_in)
+    df0
+end
+
+function _append_matches!(df0, expr_target, str::AbstractString, found_in )
     mts2 = eachmatch(expr_target, str)
     for mt in mts2
         append!(df0,
             DataFrame(
-                "target" => DataFrame(mt.match),
+                "target" => mt.match,
                 "target_type" => expr_target,
                 "target_in" => found_in
-            )
+            ); promote=true, cols = :union
         )
     end
-end
+end # FIXME: will `; promote=true, cols = :union` results in low performance?
 
+# FIXME: This is not general and extensible
 function _append_matches!(df0, str)
     append!(df0,
         DataFrame(
             "target" => str,
             "target_type" => target_事實或理由,
             "target_in" => "reason"
-        )
+        ); promote=true, cols = :union
     )
 end
