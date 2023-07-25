@@ -32,7 +32,7 @@ end
 function DataFrames.DataFrame(::FindingMingFa, fs::FileSummary)
     df0 = DataFrame()
     if fs.ext == ".json" # find targets in keys
-        d = JSON.parse(fs1.content)
+        d = JSON.parse(fs.content)
         for (k, str) in d
             if k == "reason"
                 _append_matches!(df0, str)
@@ -54,8 +54,8 @@ function DataFrames.DataFrame(::FindingMingFa, fs::FileSummary)
     end
 
 
-    insertcols!(df, "uncompresssedsize" => fs.uncompresssedsize)
-    insertcols!(df, "filename" => fs.fname)
+    insertcols!(df0, "uncompresssedsize" => fs.uncompresssedsize)
+    insertcols!(df0, "filename" => fs.fname)
 
 
 end
