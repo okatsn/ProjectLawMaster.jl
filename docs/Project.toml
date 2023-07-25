@@ -1,5 +1,8 @@
 [deps]
+AlgebraOfGraphics = "cbdf2221-f076-402e-a563-3d30da359d67"
+CairoMakie = "13f3f980-e62b-5c42-98c6-ff1f3baf88f0"
 CorpusCleanerForTWLaws = "32148328-147a-4c3a-aded-c727b77b4e74"
+DataFrames = "a93c6f00-e57d-5684-b7b6-d8193f3e46c0"
 Documenter = "e30172f5-a6a5-5a46-863b-614d45cd2de4"
 JSON = "682c06a0-de6a-54ab-a142-c8b1cf79cde6"
 ProjectLawMaster = "34127a1e-43e2-4f4e-97ac-74f3581abec9"
