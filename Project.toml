@@ -4,6 +4,7 @@ authors = ["okatsn <okatsn@gmail.com> and contributors"]
 version = "0.0.2"
 
 [deps]
+CSV = "336ed68f-0bac-5ca0-87d4-7b16caf5d00b"
 CorpusCleanerForTWLaws = "32148328-147a-4c3a-aded-c727b77b4e74"
 DataFrames = "a93c6f00-e57d-5684-b7b6-d8193f3e46c0"
 GoogleDrive = "91feb7a0-3508-11ea-1e8e-afea2c1c9a19"
@@ -14,7 +15,6 @@ Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
 ZipFile = "a5390f91-8eb1-5f08-bee0-b1d1ffed6cea"
 
 [compat]
-julia = "1.8"
 CorpusCleanerForTWLaws = "0.1.1"
 DataFrames = "1.6.1"
 GoogleDrive = "0.1.1"
@@ -22,6 +22,7 @@ JSON = "0.21.4"
 OkFiles = "0.4.1"
 SmallDatasetMaker = "0.1.5"
 ZipFile = "0.10.1"
+julia = "1.8"
 
 [extras]
 CompatHelperLocal = "5224ae11-6099-4aaa-941d-3aab004bd678"

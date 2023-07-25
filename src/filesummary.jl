@@ -8,6 +8,10 @@ struct InKey <: FromWhere
     parent
 end
 
+struct Field <: FromWhere
+    value
+end
+
 function InKey(value)
     InKey(value, 0)
 end
@@ -50,7 +54,7 @@ function DataFrames.DataFrame(::FindingMingFa, fs::FileSummary)
         d = JSON.parse(fs.content)
         for (k, str) in d
             if k == "reason"
-                _append_matches!(df0, str)
+                _append_matches!(df0, str, Field("reason"))
             end
             _append_matches!(df0, target_民事判決,  str, InKey(k))
             _append_matches!(df0, target_事實或理由, str, InKey(k))
@@ -69,8 +73,9 @@ function DataFrames.DataFrame(::FindingMingFa, fs::FileSummary)
     end
 
 
-    insertcols!(df0, "uncompresssedsize" => fs.uncompresssedsize)
-    insertcols!(df0, "filename" => fs.fname)
+    insertcols!(df0, :uncompresssedsize => fs.uncompresssedsize)
+    insertcols!(df0, :filename => fs.fname)
+    insertcols!(df0, :path_to_file => join(reverse(fs.parents), "/"))
     df0
 end
 
@@ -97,21 +102,21 @@ function _append_matches!(df0, expr_target, str::AbstractString, found_in )
     for mt in mts2
         append!(df0,
             DataFrame(
-                "target" => mt.match,
-                "target_type" => expr_target,
-                "target_in" => found_in
+                :target => mt.match,
+                :target_type => expr_target,
+                :target_in => found_in
             ); promote=true, cols = :union
         )
     end
 end # FIXME: will `; promote=true, cols = :union` results in low performance?
 
 # FIXME: This is not general and extensible
-function _append_matches!(df0, str)
+function _append_matches!(df0, str, found_in)
     append!(df0,
         DataFrame(
-            "target" => str,
-            "target_type" => target_事實或理由,
-            "target_in" => "reason"
+            :target => str,
+            :target_type => target_事實或理由,
+            :target_in => found_in
         ); promote=true, cols = :union
     )
 end
