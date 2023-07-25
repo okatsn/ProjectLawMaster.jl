@@ -4,11 +4,15 @@ authors = ["okatsn <okatsn@gmail.com> and contributors"]
 version = "0.0.2"
 
 [deps]
+AlgebraOfGraphics = "cbdf2221-f076-402e-a563-3d30da359d67"
+CairoMakie = "13f3f980-e62b-5c42-98c6-ff1f3baf88f0"
 CorpusCleanerForTWLaws = "32148328-147a-4c3a-aded-c727b77b4e74"
 GoogleDrive = "91feb7a0-3508-11ea-1e8e-afea2c1c9a19"
 JSON = "682c06a0-de6a-54ab-a142-c8b1cf79cde6"
 OkFiles = "b25a35d4-863d-483c-9fa1-95480bd075d2"
+SmallDatasetMaker = "7016d903-ac20-4882-9d97-75c232100024"
 Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
+ZipFile = "a5390f91-8eb1-5f08-bee0-b1d1ffed6cea"
 
 [compat]
 julia = "1.8"
