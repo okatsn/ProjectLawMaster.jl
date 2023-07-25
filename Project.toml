@@ -5,7 +5,9 @@ version = "0.0.2"
 
 [deps]
 CorpusCleanerForTWLaws = "32148328-147a-4c3a-aded-c727b77b4e74"
+GoogleDrive = "91feb7a0-3508-11ea-1e8e-afea2c1c9a19"
 JSON = "682c06a0-de6a-54ab-a142-c8b1cf79cde6"
+OkFiles = "b25a35d4-863d-483c-9fa1-95480bd075d2"
 Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
 
 [compat]
